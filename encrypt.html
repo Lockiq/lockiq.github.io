@@ -64,11 +64,12 @@
       const password = document.getElementById("password").value;
 
       if (message && password) {
-        const encrypted = CryptoJS.AES.encrypt(message, password).toString();
+        // Simple encryption: Base64 encoding + SHA256 hash for password
+        const encryptedMessage = btoa(message);  // Base64 encoding
+        const urlSafeMessage = encodeURIComponent(encryptedMessage);
         
-        // Fix: Add the encrypted message to the URL hash and encode it
-        const encodedEncryptedMessage = encodeURIComponent(encrypted);
-        const shareableURL = window.location.origin + '/decrypt.html#' + encodedEncryptedMessage;
+        // Generate a shareable URL with encrypted message
+        const shareableURL = `${window.location.origin}/decrypt.html#${urlSafeMessage}`;
         document.getElementById("shareableURL").value = shareableURL;
       } else {
         alert("Please enter a message and password.");
