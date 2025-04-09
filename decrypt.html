@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LockIQ - Encrypt</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1-crypto-js.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    input, textarea {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #333;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .back-button {
+      margin-top: 20px;
+      padding: 5px 10px;
+      background-color: #888;
+      font-size: 14px;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>LockIQ - Encrypt Your Message</h1>
+
+  <textarea id="inputMessage" placeholder="Enter your message here"></textarea>
+  <br>
+  <input type="password" id="password" placeholder="Enter password" />
+  <br>
+  <button onclick="encryptMessage()">Encrypt</button>
+
+  <h2>Generated Shareable URL</h2>
+  <input type="text" id="shareableURL" readonly placeholder="Generated URL will appear here" />
+
+  <button class="back-button" onclick="window.location.href = 'index.html';">Back to Home</button>
+
+  <script>
+    function encryptMessage() {
+      const message = document.getElementById("inputMessage").value;
+      const password = document.getElementById("password").value;
+
+      if (message && password) {
+        const encrypted = CryptoJS.AES.encrypt(message, password).toString();
+        const shareableURL = window.location.origin + '/decrypt.html#' + encodeURIComponent(encrypted);
+        document.getElementById("shareableURL").value = shareableURL;
+      } else {
+        alert("Please enter a message and password.");
+      }
+    }
+  </script>
+
+</body>
+</html>
