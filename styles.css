@@ -59,6 +59,12 @@ textarea {
     resize: none;
 }
 
+/* Centered button after textarea */
+button + button {
+    display: block;
+    margin: 20px auto;
+}
+
 /* Back button */
 .back-button {
     padding: 10px 20px;
