@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LockIQ - Encrypt & Share</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1-crypto-js.js"></script>
+  <title>LockIQ - Home</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,14 +12,6 @@
       text-align: center;
       padding: 20px;
     }
-    textarea, input {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #333;
-    }
     button {
       padding: 10px 20px;
       background-color: #3498db;
@@ -28,6 +19,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 18px;
     }
     button:hover {
       background-color: #2980b9;
@@ -36,69 +28,11 @@
 </head>
 <body>
 
-  <h1>LockIQ - Secure Message Encryption</h1>
+  <h1>Welcome to LockIQ</h1>
+  <p>Encrypt and decrypt your messages securely.</p>
 
-  <!-- Encrypt/Decrypt Form -->
-  <textarea id="inputMessage" placeholder="Enter your message here"></textarea>
-  <br>
-  <input type="password" id="password" placeholder="Enter password" />
-  <br>
-  
-  <button onclick="encryptMessage()">Encrypt Message</button>
-  <button onclick="decryptMessage()">Decrypt Message</button>
-  
-  <h2>Encrypted Message</h2>
-  <textarea id="encryptedMessage" readonly placeholder="Encrypted text will appear here"></textarea>
-
-  <h2>Shareable URL</h2>
-  <input type="text" id="shareableURL" readonly placeholder="Generated URL will appear here" />
-
-  <script>
-    // Encrypt message function
-    function encryptMessage() {
-      const message = document.getElementById("inputMessage").value;
-      const password = document.getElementById("password").value;
-      
-      if (message && password) {
-        const encrypted = CryptoJS.AES.encrypt(message, password).toString();
-        document.getElementById("encryptedMessage").value = encrypted;
-
-        // Create a shareable URL
-        const shareableURL = window.location.href.split('#')[0] + '#' + encodeURIComponent(encrypted);
-        document.getElementById("shareableURL").value = shareableURL;
-      } else {
-        alert("Please enter a message and password.");
-      }
-    }
-
-    // Decrypt message function
-    function decryptMessage() {
-      const encryptedMessage = document.getElementById("encryptedMessage").value;
-      const password = document.getElementById("password").value;
-      
-      if (encryptedMessage && password) {
-        const bytes = CryptoJS.AES.decrypt(encryptedMessage, password);
-        const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-        
-        if (decrypted) {
-          document.getElementById("inputMessage").value = decrypted;
-        } else {
-          alert("Invalid password or corrupted message.");
-        }
-      } else {
-        alert("Please enter the encrypted message and password.");
-      }
-    }
-
-    // Check for a hash in the URL and auto-fill the encrypted message
-    window.onload = function() {
-      const hash = window.location.hash.substr(1);
-      if (hash) {
-        const encryptedMessage = decodeURIComponent(hash);
-        document.getElementById("encryptedMessage").value = encryptedMessage;
-      }
-    };
-  </script>
+  <button onclick="window.location.href = 'encrypt.html';">Go to Encrypt Page</button>
+  <button onclick="window.location.href = 'decrypt.html';">Go to Decrypt Page</button>
 
 </body>
 </html>
