@@ -65,7 +65,10 @@
 
       if (message && password) {
         const encrypted = CryptoJS.AES.encrypt(message, password).toString();
-        const shareableURL = window.location.origin + '/decrypt.html#' + encodeURIComponent(encrypted);
+        
+        // Fix: Add the encrypted message to the URL hash and encode it
+        const encodedEncryptedMessage = encodeURIComponent(encrypted);
+        const shareableURL = window.location.origin + '/decrypt.html#' + encodedEncryptedMessage;
         document.getElementById("shareableURL").value = shareableURL;
       } else {
         alert("Please enter a message and password.");
