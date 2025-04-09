@@ -64,7 +64,7 @@
         document.getElementById("encryptedMessage").value = encrypted;
 
         // Create a shareable URL
-        const shareableURL = window.location.href.split('#')[0] + '#' + encrypted;
+        const shareableURL = window.location.href.split('#')[0] + '#' + encodeURIComponent(encrypted);
         document.getElementById("shareableURL").value = shareableURL;
       } else {
         alert("Please enter a message and password.");
@@ -94,7 +94,8 @@
     window.onload = function() {
       const hash = window.location.hash.substr(1);
       if (hash) {
-        document.getElementById("encryptedMessage").value = hash;
+        const encryptedMessage = decodeURIComponent(hash);
+        document.getElementById("encryptedMessage").value = encryptedMessage;
       }
     };
   </script>
